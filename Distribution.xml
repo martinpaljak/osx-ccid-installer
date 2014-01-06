@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="2">
+  <allowed-os-versions>
+    <os-version min="10.8"/>
+  </allowed-os-versions>
+  <license file="license.rtf" mime-type="text/rtf"/>
+  <welcome file="welcome.rtf" mime-type="text/rtf"/>
+  <title>CCID free software driver</title>
+  <pkg-ref id="org.openkms.mac.ccid"/>
+  <options customize="never" require-scripts="false"/>
+  <choices-outline>
+    <line choice="default">
+      <line choice="org.openkms.mac.ccid"/>
+    </line>
+  </choices-outline>
+  <choice id="default"/>
+  <choice id="org.openkms.mac.ccid" visible="false">
+    <pkg-ref id="org.openkms.mac.ccid"/>
+  </choice>
+  <pkg-ref id="org.openkms.mac.ccid" version="1.4.14" onConclusion="none">ifd-ccid-openkms.pkg</pkg-ref>
+</installer-gui-script>
