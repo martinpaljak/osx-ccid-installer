@@ -2,7 +2,7 @@
 set -xe
 
 # clean sources
-test x"$1" == x"clean" && rm -rf trunk libusbx
+test x"$1" == x"clean" && rm -rf trunk libusb
 
 # clean previous bits and pieces
 rm -rf target build *.pkg *.dmg
@@ -14,8 +14,8 @@ LIBUSBX_REV=8b46e1c
 test -e trunk || svn checkout -r $CCID_REV svn://anonscm.debian.org/pcsclite/trunk
 svn revert -R trunk
 svn up -r $CCID_REV trunk
-test -e libusbx || git clone https://github.com/libusbx/libusbx.git
-(cd libusbx && git reset --hard $LIBUSBX_REV && git clean -dfx)
+test -e libusb || git clone https://github.com/libusb/libusb.git
+(cd libusb && git reset --hard $LIBUSBX_REV && git clean -dfx)
 
 # set common compiler flags
 export CFLAGS="-mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -arch i386 -arch x86_64"
@@ -23,8 +23,8 @@ export CFLAGS="-mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Conte
 TARGET=$(PWD)/target
 BUILDPREFIX=$(PWD)/build
 
-# build libusbx
-(cd libusbx
+# build libusb
+(cd libusb
 ./autogen.sh
 ./configure --prefix=$BUILDPREFIX --disable-dependency-tracking --enable-static --disable-shared \
 && make \
