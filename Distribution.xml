@@ -17,5 +17,5 @@
   <choice id="org.openkms.mac.ccid" visible="false">
     <pkg-ref id="org.openkms.mac.ccid"/>
   </choice>
-  <pkg-ref id="org.openkms.mac.ccid" version="1.4.14" onConclusion="none">ifd-ccid-openkms.pkg</pkg-ref>
+  <pkg-ref id="org.openkms.mac.ccid" onConclusion="none">ifd-ccid-openkms.pkg</pkg-ref>
 </installer-gui-script>
