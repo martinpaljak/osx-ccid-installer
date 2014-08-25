@@ -8,8 +8,8 @@ test x"$1" == x"clean" && rm -rf trunk libusb
 rm -rf target build *.pkg *.dmg
 
 # fetch sources and/or clean existing ones
-CCID_REV=6811
-LIBUSBX_REV=8b46e1c
+CCID_REV=6959
+LIBUSBX_REV=v1.0.19
 
 test -e trunk || svn checkout -r $CCID_REV svn://anonscm.debian.org/pcsclite/trunk
 svn revert -R trunk

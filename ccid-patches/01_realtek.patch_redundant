@@ -13,7 +13,7 @@ Index: Drivers/ccid/src/ccid_usb.c
 +	   work. */
 +	if (!strcmp("Generic USB2.0-CRW", device)) {
 +		DEBUG_CRITICAL("Giving Realtek chip some more time...");
-+		usleep(900000);
++		usleep(1100000);
 +	}
 +#endif
  	cnt = libusb_get_device_list(ctx, &devs);
