@@ -1,0 +1,12 @@
+[submodule "libusb"]
+	path = libusb
+	url = https://github.com/libusb/libusb
+[submodule "CCID"]
+	path = CCID
+	url = git://anonscm.debian.org/pcsclite/CCID.git
+[submodule "PCSC"]
+	path = PCSC
+	url = git://anonscm.debian.org/pcsclite/PCSC.git
+[submodule "contrib"]
+	path = contrib
+	url = git://anonscm.debian.org/pcsclite/contrib.git

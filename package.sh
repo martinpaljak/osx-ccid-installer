@@ -2,23 +2,13 @@
 set -xe
 
 # clean sources
-test x"$1" == x"clean" && rm -rf trunk libusb
+test x"$1" == x"clean" && (git submodule foreach git clean -dfx; git submodule foreach git reset --hard)
 
 # clean previous bits and pieces
 rm -rf target build *.pkg *.dmg
 
-# fetch sources and/or clean existing ones
-CCID_REV=6959
-LIBUSBX_REV=v1.0.19
-
-test -e trunk || svn checkout -r $CCID_REV svn://anonscm.debian.org/pcsclite/trunk
-svn revert -R trunk
-svn up -r $CCID_REV trunk
-test -e libusb || git clone https://github.com/libusb/libusb.git
-(cd libusb && git reset --hard $LIBUSBX_REV && git clean -dfx)
-
 # set common compiler flags
-export CFLAGS="-mmacosx-version-min=10.8 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -arch i386 -arch x86_64"
+export CFLAGS="-mmacosx-version-min=10.9 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -arch i386 -arch x86_64"
 
 TARGET=$(PWD)/target
 BUILDPREFIX=$(PWD)/build
@@ -35,17 +25,16 @@ BUILDPREFIX=$(PWD)/build
 export PKG_CONFIG_PATH=$BUILDPREFIX/lib/pkgconfig:$PKG_CONFIG_PATH
 export BUNDLE_ID=openkms
 
-(cd trunk
+(cd CCID
 # apply patches
-for f in ../ccid-patches/*.patch; do echo $(basename $f); patch -p0 < $f; done
-cd Drivers/ccid
+for f in ../ccid-patches/*.patch; do echo $(basename $f); patch --forward -p1 < $f; done
 ./bootstrap
 ./MacOSX/configure
 make
 make install DESTDIR=$TARGET
 )
 # wrap up the root
-pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version 1.4.14 --install-location / --ownership recommended ifd-ccid-openkms.pkg
+pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version 1.4.18 --install-location / --ownership recommended ifd-ccid-openkms.pkg
 
 # create the installer
 
