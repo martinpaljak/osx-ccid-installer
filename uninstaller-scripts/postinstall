@@ -2,17 +2,12 @@
 set -e
 
 # Fail to run if not found
-if ! test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid-openkms.bundle; then
-   echo "ifd-ccid-openkms.bundle not found!"
+if ! test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz; then
+   echo "ifd-ccid.bundle backup not found!"
    exit 1
 fi
 
-# Re-enable stock CCID library
-if test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/Info.plist_backup; then
-  if ! test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/Info.plist; then
-    mv /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/Info.plist_backup \
-      /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/Info.plist
-    # remove the bundle
-    rm -rf /usr/libexec/SmartCardServices/drivers/ifd-ccid-openkms.bundle
-  fi
-fi
+# unpack
+tar -C / -xzvf /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz
+# and remove backup
+rm -f /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz

@@ -2,13 +2,14 @@
 set -xe
 
 # clean sources
-test x"$1" == x"clean" && (git submodule foreach git clean -dfx; git submodule foreach git reset --hard)
+git submodule foreach git clean -dfx
+git submodule foreach git reset --hard
 
 # clean previous bits and pieces
 rm -rf target build *.pkg *.dmg
 
 # set common compiler flags
-export CFLAGS="-mmacosx-version-min=10.9 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -arch i386 -arch x86_64"
+export CFLAGS="-mmacosx-version-min=10.10 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -arch i386 -arch x86_64"
 
 TARGET=$(PWD)/target
 BUILDPREFIX=$(PWD)/build
@@ -23,7 +24,6 @@ BUILDPREFIX=$(PWD)/build
 
 # build ccid
 export PKG_CONFIG_PATH=$BUILDPREFIX/lib/pkgconfig:$PKG_CONFIG_PATH
-export BUNDLE_ID=openkms
 
 (cd CCID
 # apply patches
@@ -33,6 +33,7 @@ for f in ../ccid-patches/*.patch; do echo $(basename $f); patch --forward -p1 < 
 make
 make install DESTDIR=$TARGET
 )
+
 # wrap up the root
 pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version 1.4.18 --install-location / --ownership recommended ifd-ccid-openkms.pkg
 
