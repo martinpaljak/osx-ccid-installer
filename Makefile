@@ -1,0 +1,3 @@
+default:
+	sh package.sh
+	
