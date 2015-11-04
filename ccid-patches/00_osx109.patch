@@ -7,7 +7,7 @@ index 1ba7b30..d5933cb 100755
  else
  	echo "Universal Binary build"
 -	CFLAGS="$CFLAGS -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk -arch i386 -arch x86_64"
-+	CFLAGS="$CFLAGS -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -arch i386 -arch x86_64"
++	CFLAGS="$CFLAGS -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -arch i386 -arch x86_64"
  fi
  echo
  
