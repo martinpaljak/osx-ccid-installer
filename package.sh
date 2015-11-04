@@ -9,7 +9,7 @@ git submodule foreach git reset --hard
 rm -rf target build *.pkg *.dmg
 
 # set common compiler flags
-export CFLAGS="-mmacosx-version-min=10.10 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -arch i386 -arch x86_64"
+export CFLAGS="-mmacosx-version-min=10.11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -arch x86_64"
 
 TARGET=$(PWD)/target
 BUILDPREFIX=$(PWD)/build

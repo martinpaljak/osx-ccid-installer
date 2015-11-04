@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <installer-gui-script minSpecVersion="2">
   <allowed-os-versions>
-    <os-version min="10.10"/>
+    <os-version min="10.11"/>
   </allowed-os-versions>
   <license file="license.rtf" mime-type="text/rtf"/>
   <welcome file="welcome.rtf" mime-type="text/rtf"/>
