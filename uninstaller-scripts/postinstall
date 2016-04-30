@@ -1,13 +1,4 @@
 #!/bin/bash
 set -e
 
-# Fail to run if not found
-if ! test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz; then
-   echo "ifd-ccid.bundle backup not found!"
-   exit 1
-fi
-
-# unpack
-tar -C / -xzvf /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz
-# and remove backup
-rm -f /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz
+test -e /usr/local/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/magic && rm -rf /usr/local/libexec/SmartCardServices/drivers/ifd-ccid.bundle

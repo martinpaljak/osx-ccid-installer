@@ -1,7 +1,0 @@
-#!/bin/bash
-set -e
-
-# Backup stock CCID library
-if ! test -e /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz; then
-  tar czvf /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle-backup.tar.gz /usr/libexec/SmartCardServices/drivers/ifd-ccid.bundle
-fi

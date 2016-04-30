@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+
+touch /usr/local/libexec/SmartCardServices/drivers/ifd-ccid.bundle/Contents/magic
