@@ -2,3 +2,12 @@ os: osx
 osx_image: xcode7.3
 language: c
 script: ./package.sh
+deploy:
+  api-key:
+    secure: a8/PW0FuXvHhk9WLo4YGCI/yU3SrOq6ImaJgvILi/+P4/HZV+gT2vgs562ftiB/OtPdlCh5ltg4DeqF7GLUZMHMSfHYnK6RA7WSS/FV9d6fUK4IB1FzFQnnj8MG16qFzsjgYy0pDYvSPLR1TFHXe35n2cVhAkeGq+ejktf1Apcg=
+  provider: releases
+  file:
+    - ccid-openkms-installer.dmg
+  skip_cleanup: true
+  on:
+    tags: true

@@ -11,8 +11,9 @@ rm -rf target build *.pkg *.dmg
 # set common compiler flags
 export CFLAGS="-mmacosx-version-min=10.11 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -arch x86_64"
 
-TARGET=$(PWD)/target
-BUILDPREFIX=$(PWD)/build
+TARGET="${PWD}/target"
+BUILDPREFIX="${PWD}/build"
+CCIDVER="$(cd CCID && git describe --always --tags)"
 
 # build libusb
 (cd libusb
@@ -35,7 +36,7 @@ make install DESTDIR=$TARGET
 )
 
 # wrap up the root
-pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version 1.4.23 --install-location / --ownership recommended ifd-ccid-openkms.pkg
+pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version ${CCIDVER} --install-location / --ownership recommended ifd-ccid-openkms.pkg
 
 # create the installer
 
@@ -46,6 +47,6 @@ productbuild --distribution Distribution.xml --package-path . --resources resour
 pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts uninstall.pkg
 
 # wrap into DMG
-hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-openkms-installer.pkg -volname "CCID free software driver installer" ccid-openkms-installer.dmg
+hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-openkms-installer.pkg -volname "CCID installer (${CCIDVER})" ccid-openkms-installer.dmg
 
 # success
