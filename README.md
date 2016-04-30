@@ -1,4 +1,4 @@
-CCID free software driver installer
+CCID free software driver installer [![Build Status](https://travis-ci.org/martinpaljak/osx-ccid-installer.svg?branch=master)](https://travis-ci.org/martinpaljak/osx-ccid-installer) 
 ===================================
 
 Built from the excellent [CCID free software driver](http://pcsclite.alioth.debian.org/ccid.html) sources:
