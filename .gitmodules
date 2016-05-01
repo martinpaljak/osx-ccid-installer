@@ -3,4 +3,4 @@
 	url = https://github.com/libusb/libusb
 [submodule "CCID"]
 	path = CCID
-	url = git://anonscm.debian.org/pcsclite/CCID.git
+	url = https://github.com/LudovicRousseau/CCID
