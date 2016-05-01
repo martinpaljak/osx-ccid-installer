@@ -36,17 +36,17 @@ make install DESTDIR=$TARGET
 )
 
 # wrap up the root
-pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version ${CCIDVER} --install-location / --ownership recommended ifd-ccid-openkms.pkg
+pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version ${CCIDVER} --install-location / --ownership recommended ifd-ccid.pkg
 
 # create the installer
 
 # productbuild --sign "my-test-installer" --distribution macosx/Distribution.xml --package-path . --resources macosx/resources pluss-id-installer.pkg
-productbuild --distribution Distribution.xml --package-path . --resources resources ccid-openkms-installer.pkg
+productbuild --distribution Distribution.xml --package-path . --resources resources ccid-installer.pkg
 
 # create uninstaller
 pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts uninstall.pkg
 
 # wrap into DMG
-hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-openkms-installer.pkg -volname "CCID installer (${CCIDVER})" ccid-openkms-installer.dmg
+hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer (${CCIDVER})" ccid-installer.dmg
 
 # success
