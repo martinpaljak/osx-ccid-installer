@@ -1,13 +1,14 @@
 # CCID free software driver installer [![Build Status](https://travis-ci.org/martinpaljak/osx-ccid-installer.svg?branch=master)](https://travis-ci.org/martinpaljak/osx-ccid-installer) 
 
-Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capitan-and-ccid-driver-upgrades.html) and [features](https://en.wikipedia.org/wiki/System_Integrity_Protection), built from the excellent [CCID free software driver](http://pcsclite.alioth.debian.org/ccid.html) [sources](https://github.com/LudovicRousseau/CCID)
+Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capitan-and-ccid-driver-upgrades.html) and [features](https://en.wikipedia.org/wiki/System_Integrity_Protection); built from the excellent [CCID free software driver](http://pcsclite.alioth.debian.org/ccid.html) [sources](https://github.com/LudovicRousseau/CCID):
 
-#### Easy-to-use (graphical) installer for OSX 10.11 ####
+#### Easy-to-use (graphical) installer for OSX 10.11
 * To download a pre-built installer, see [releases](https://github.com/martinpaljak/osx-ccid-installer/releases)
 * To read more about the [future of this installer](http://lists.musclecard.com/pipermail/muscle_lists.musclecard.com/2014-January/010027.html)
-* To complain: martin@martinpaljak.net
+* To complain: email martin@martinpaljak.net or [file an issue](https://github.com/martinpaljak/osx-ccid-installer/issues/new)
 * To build yourself (requires XCode plus `libtool`, `autoconf` and `automake` from Homebrew/MacPorts/Fink)
-  
-        git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
-        cd osx-ccid-installer
-        ./package.sh
+```
+  git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
+  cd osx-ccid-installer
+  ./package.sh
+```
