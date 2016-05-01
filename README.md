@@ -4,11 +4,10 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 
 #### Easy-to-use (graphical) installer for OSX 10.11 ####
 * To download a pre-built installer, see [releases](https://github.com/martinpaljak/osx-ccid-installer/releases)
+* To read more about the [future of this installer](http://lists.musclecard.com/pipermail/muscle_lists.musclecard.com/2014-January/010027.html)
+* To complain: martin@martinpaljak.net
 * To build yourself (requires XCode plus `libtool`, `autoconf` and `automake` from Homebrew/MacPorts/Fink)
   
         git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
         cd osx-ccid-installer
         ./package.sh
-
-* To read more about the [future of this installer](http://lists.musclecard.com/pipermail/muscle_lists.musclecard.com/2014-January/010027.html)
-* To complain: martin@martinpaljak.net
