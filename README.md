@@ -8,6 +8,5 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 * To build yourself (requires XCode plus `libtool`, `autoconf` and `automake` from Homebrew/MacPorts/Fink)
 ```
   git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
-  cd osx-ccid-installer
-  make
+  make -C osx-ccid-installer
 ```
