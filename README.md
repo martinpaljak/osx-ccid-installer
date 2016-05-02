@@ -9,5 +9,5 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 ```
   git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
   cd osx-ccid-installer
-  ./package.sh
+  make
 ```
