@@ -13,7 +13,7 @@ export CFLAGS="-mmacosx-version-min=10.11 -isysroot /Applications/Xcode.app/Cont
 
 TARGET="${PWD}/target"
 BUILDPREFIX="${PWD}/build"
-CCIDVER="$(cd CCID && git describe --always --tags)"
+CCIDVER="$(cd CCID && git describe --always --tags --long)"
 
 # build libusb
 (cd libusb
