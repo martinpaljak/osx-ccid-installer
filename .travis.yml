@@ -8,6 +8,7 @@ deploy:
   provider: releases
   file:
     - ccid-installer.dmg
+    - ccid-*.tar.gz
   skip_cleanup: true
   on:
     tags: true

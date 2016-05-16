@@ -35,6 +35,9 @@ make
 make install DESTDIR=$TARGET
 )
 
+# wrap up (possibly patched) CCID sources
+make -C CCID dist-gzip
+mv CCID/ccid-*.tar.gz ${CCIDVER}.tar.gz
 # wrap up the root
 pkgbuild --root $TARGET --scripts scripts --identifier org.openkms.mac.ccid --version ${CCIDVER} --install-location / --ownership recommended ifd-ccid.pkg
 
