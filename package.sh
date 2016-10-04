@@ -8,9 +8,10 @@ git submodule foreach git reset --hard
 # clean previous bits and pieces
 rm -rf target build *.pkg *.dmg
 
-# set common compiler flags
-OSXSDK=$(find /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs  -depth 1 | sort -n | head -1)
-export CFLAGS="-mmacosx-version-min=10.11 -isysroot ${OSXSDK} -arch x86_64"
+# Locate the latest OSX SDK
+SDKS_PATH="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs"
+SDK_PATH="${SDK_PATH:-$SDKS_PATH/$(ls -1 ${SDKS_PATH} | sort -n -k2 -t. -r | head -1)}"
+export CFLAGS="-mmacosx-version-min=10.11 -isysroot ${SDK_PATH} -arch x86_64"
 
 TARGET="${PWD}/target"
 BUILDPREFIX="${PWD}/build"
