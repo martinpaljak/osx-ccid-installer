@@ -8,10 +8,8 @@ git submodule foreach git reset --hard
 # clean previous bits and pieces
 rm -rf target build *.pkg *.dmg
 
-# Locate the latest OSX SDK
-SDKS_PATH="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs"
-SDK_PATH="${SDK_PATH:-$SDKS_PATH/$(ls -1 ${SDKS_PATH} | sort -n -k2 -t. -r | head -1)}"
-export CFLAGS="-mmacosx-version-min=10.11 -isysroot ${SDK_PATH} -arch x86_64"
+# Target 10.11+
+export CFLAGS="-mmacosx-version-min=10.11"
 
 TARGET="${PWD}/target"
 BUILDPREFIX="${PWD}/build"
@@ -29,8 +27,6 @@ CCIDVER="$(cd CCID && git describe --always --tags --long)"
 export PKG_CONFIG_PATH=$BUILDPREFIX/lib/pkgconfig:$PKG_CONFIG_PATH
 
 (cd CCID
-# apply patches
-for f in ../ccid-patches/*.patch; do echo $(basename $f); patch --forward -p1 < $f; done
 ./bootstrap
 ./MacOSX/configure
 make
