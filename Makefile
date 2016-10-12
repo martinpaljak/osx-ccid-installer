@@ -1,2 +1,62 @@
-default:
-	sh package.sh
+# Target 10.11+
+CFLAGS = -mmacosx-version-min=10.11
+export CFLAGS
+TARGET = $(PWD)/target
+BUILDPREFIX = $(PWD)/tmp
+CCIDVER = $(shell cd CCID && git describe --always --tags --long)
+SIGNER ?= 9ME8T34MPV
+
+
+# build ccid
+PKG_CONFIG_PATH = $(BUILDPREFIX)/lib/pkgconfig
+export PKG_CONFIG_PATH
+
+default: clean unsigned dmg
+
+clean:
+	git submodule foreach git clean -dfx
+	git submodule foreach git reset --hard
+	rm -rf target build *.pkg *.dmg
+
+target:
+	# Build libusb
+	(cd libusb \
+	&& ./autogen.sh \
+	&& ./configure --prefix=$(BUILDPREFIX) --disable-dependency-tracking --enable-static --disable-shared \
+	&& make \
+	&& make install \
+	)
+	# Build CCID
+	(cd CCID \
+	&& ./bootstrap \
+	&& ./MacOSX/configure \
+	&& make \
+	&& make install DESTDIR=$(TARGET) \
+	)
+
+srcdist:
+	make -C CCID dist-gzip
+	mv CCID/ccid-*.tar.gz $(CCIDVER).tar.gz
+
+ifd-ccid.pkg: target
+	pkgbuild --root $(TARGET) --scripts scripts --identifier org.openkms.mac.ccid --version $(CCIDVER) --install-location / --ownership recommended ifd-ccid.pkg
+
+signed: ifd-ccid.pkg
+	productbuild --distribution Distribution.xml --package-path . --resources resources --sign "$(SIGNER)" ccid-installer.pkg
+
+unsigned: ifd-ccid.pkg
+	productbuild --distribution Distribution.xml --package-path . --resources resources ccid-installer.pkg
+
+uninstall.pkg:
+	pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts uninstall.pkg
+
+ccid-installer.dmg: ccid-installer.pkg uninstall.pkg
+	hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer ($(CCIDVER))" ccid-installer.dmg
+
+dmg: ccid-installer.dmg
+
+dmgsign: ccid-installer.dmg
+	codesign -s "$(SIGNER)" ccid-installer.dmg
+
+dist: clean signed dmg dmgsign
+	cp ccid-installer.dmg ccid-installer-signed.dmg
