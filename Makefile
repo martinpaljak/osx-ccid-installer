@@ -44,14 +44,16 @@ ifd-ccid.pkg: target
 signed: ifd-ccid.pkg
 	productbuild --distribution Distribution.xml --package-path . --resources resources --sign "$(SIGNER)" ccid-installer.pkg
 
-unsigned: ifd-ccid.pkg
+ccid-installer.pkg: ifd-ccid.pkg
 	productbuild --distribution Distribution.xml --package-path . --resources resources ccid-installer.pkg
+
+pkg: ccid-installer.pkg
 
 uninstall.pkg:
 	pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts uninstall.pkg
 
 ccid-installer.dmg: ccid-installer.pkg uninstall.pkg
-	hdiutil create -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer ($(CCIDVER))" ccid-installer.dmg
+	hdiutil create -ov -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer ($(CCIDVER))" ccid-installer.dmg
 
 dmg: ccid-installer.dmg
 
