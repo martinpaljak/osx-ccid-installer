@@ -1,17 +1,16 @@
 # Target 10.11+
 CFLAGS = -mmacosx-version-min=10.11
 export CFLAGS
+
 TARGET = $(PWD)/target
 BUILDPREFIX = $(PWD)/tmp
 CCIDVER = $(shell cd CCID && git describe --always --tags --long)
 SIGNER ?= 9ME8T34MPV
 
-
-# build ccid
 PKG_CONFIG_PATH = $(BUILDPREFIX)/lib/pkgconfig
 export PKG_CONFIG_PATH
 
-default: clean unsigned dmg
+default: clean dmg
 
 clean:
 	git submodule foreach git clean -dfx
