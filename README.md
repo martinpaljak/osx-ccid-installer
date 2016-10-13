@@ -16,4 +16,5 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 ```
   make dist SIGNER="XXXXXXXXXX"
 ```
-* where `XXXXXXXXXX` is a Developer ID, such as `9ME8T34MPV`
+* where `XXXXXXXXXX` is a [Developer ID](https://developer.apple.com/developer-id/), such as `9ME8T34MPV`.
+  * You can list your ID-s with `security find-identity -v -p codesigning`
