@@ -5,7 +5,7 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 ### Easy-to-use (graphical) installer for OSX 10.11 & 10.12
 * To download a pre-built installer, see [releases](https://github.com/martinpaljak/osx-ccid-installer/releases)
 * To get help: [file an issue](https://github.com/martinpaljak/osx-ccid-installer/issues/new)
-* To build yourself (requires XCode plus `libtool`, `autoconf` and `automake` from Homebrew/MacPorts/Fink)
+* To build yourself (requires XCode plus `libtool`, `autoconf`, `automake` and `pkg-config` from Homebrew/MacPorts/Fink)
 ```
   git clone --recursive https://github.com/martinpaljak/osx-ccid-installer
   make -C osx-ccid-installer
