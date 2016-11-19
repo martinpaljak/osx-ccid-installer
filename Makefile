@@ -10,7 +10,9 @@ SIGNER ?= 9ME8T34MPV
 PKG_CONFIG_PATH = $(BUILDPREFIX)/lib/pkgconfig
 export PKG_CONFIG_PATH
 
-default: clean dmg
+default:
+	$(MAKE) clean
+	$(MAKE) dmg
 
 clean:
 	git submodule foreach git clean -dfx
