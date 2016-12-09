@@ -40,21 +40,21 @@ srcdist:
 	mv CCID/ccid-*.tar.gz $(CCIDVER).tar.gz
 
 ifd-ccid.pkg: target
-	pkgbuild --root $(TARGET) --scripts scripts --identifier org.openkms.mac.ccid --version $(CCIDVER) --install-location / --ownership recommended ifd-ccid.pkg
+	pkgbuild --root $(TARGET) --scripts scripts --identifier org.openkms.mac.ccid --version $(CCIDVER) --install-location / --ownership recommended $@
 
 signed: ifd-ccid.pkg
 	productbuild --distribution Distribution.xml --package-path . --resources resources --sign "$(SIGNER)" ccid-installer.pkg
 
 ccid-installer.pkg: ifd-ccid.pkg
-	productbuild --distribution Distribution.xml --package-path . --resources resources ccid-installer.pkg
+	productbuild --distribution Distribution.xml --package-path . --resources resources $@
 
 pkg: ccid-installer.pkg
 
 uninstall.pkg:
-	pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts uninstall.pkg
+	pkgbuild --nopayload --identifier org.openkms.mac.ccid.uninstall --scripts uninstaller-scripts $@
 
 ccid-installer.dmg: ccid-installer.pkg uninstall.pkg
-	hdiutil create -ov -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer ($(CCIDVER))" ccid-installer.dmg
+	hdiutil create -ov -srcfolder uninstall.pkg -srcfolder ccid-installer.pkg -volname "CCID installer ($(CCIDVER))" $@
 
 dmg: ccid-installer.dmg
 
