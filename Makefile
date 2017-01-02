@@ -61,5 +61,9 @@ dmg: ccid-installer.dmg
 dmgsign: ccid-installer.dmg
 	codesign -s "$(SIGNER)" ccid-installer.dmg
 
-dist: clean signed dmg dmgsign
+dist:
+	$(MAKE) clean
+	$(MAKE) signed
+	$(MAKE) dmg
+	$(MAKE) dmgsign
 	cp ccid-installer.dmg ccid-installer-signed.dmg
