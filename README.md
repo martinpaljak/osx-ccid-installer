@@ -14,7 +14,8 @@ Because of [OSX bugs](http://ludovicrousseau.blogspot.com/2016/04/os-x-el-capita
 #### Development
 * To build a signed release:
 ```
-  make dist SIGNER="XXXXXXXXXX"
+  make SIGNER="XXX"
 ```
-* where `XXXXXXXXXX` is a [Developer ID](https://developer.apple.com/developer-id/), such as `9ME8T34MPV`.
+* where `XXX` is the personal part of a [Developer ID](https://developer.apple.com/developer-id/) certificate common name, such as `Martin Paljak`
+or `Martin Paljak (9ME8T34MPV)`
   * You can list your ID-s with `security find-identity -v -p codesigning`
