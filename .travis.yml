@@ -1,14 +1,29 @@
 os: osx
 language: c
 script: make
+before_deploy:
+- mkdir output
+- cp ccid-installer.dmg ccid-*.tar.gz output
 deploy:
-  api-key:
-    secure: a8/PW0FuXvHhk9WLo4YGCI/yU3SrOq6ImaJgvILi/+P4/HZV+gT2vgs562ftiB/OtPdlCh5ltg4DeqF7GLUZMHMSfHYnK6RA7WSS/FV9d6fUK4IB1FzFQnnj8MG16qFzsjgYy0pDYvSPLR1TFHXe35n2cVhAkeGq+ejktf1Apcg=
-  provider: releases
-  file_glob: true
-  file:
-    - ccid-installer.dmg
-    - ccid-*.tar.gz
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: releases
+    api-key:
+      secure: a8/PW0FuXvHhk9WLo4YGCI/yU3SrOq6ImaJgvILi/+P4/HZV+gT2vgs562ftiB/OtPdlCh5ltg4DeqF7GLUZMHMSfHYnK6RA7WSS/FV9d6fUK4IB1FzFQnnj8MG16qFzsjgYy0pDYvSPLR1TFHXe35n2cVhAkeGq+ejktf1Apcg=
+    file_glob: true
+    file:
+      - ccid-installer.dmg
+      - ccid-*.tar.gz
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: gcs
+    access_key_id: GOOGUFAZQVEHQBWNOXUC
+    secret_access_key:
+      secure: "TUkpOndrWDT4OIWfvEKY7YGXYUETRN0ScBReWRpXk4f04MUI2Taq2LSf4zTYkUZ6hF4kbxicb+mU9xxu8AygkBB6EkAD99yTWKhSBpoFvyQqR6Zp58c0p0ysZD5/Q0CXlQeWpaS0sx5WlqLLXdlJgRyVl5jHo/jnK2AJ1xWlSFo="
+    bucket: github-martinpaljak-builds
+    on:
+      repo: martinpaljak/osx-ccid-installer
+      all_branches: true
+    skip_cleanup: true
+    acl: public-read
+    local-dir: output
+    upload-dir: osx-ccid-installer/${TRAVIS_BUILD_NUMBER}
