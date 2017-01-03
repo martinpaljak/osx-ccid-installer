@@ -2,7 +2,7 @@ os: osx
 language: c
 script: make
 before_deploy:
-- mkdir output
+- mkdir -p output
 - cp ccid-installer.dmg ccid-*.tar.gz output
 deploy:
   - provider: releases
